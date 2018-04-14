@@ -6,7 +6,8 @@ namespace Pistachio {
 	public static class EntityExtension {
 		public static long Save<T>(T entity, IAdapterService adapterService = null) where T : IEntity, new() {
 			var contextAdapterService = (adapterService ?? DataContext.GetAdapterService<T>());
-			if (entity.Id <= 0 || entity.Saved == false) {
+			//if (entity.Id <= 0 || entity.Saved == false) {
+			if (entity.Id <= 0 ) {
 				QueryInsertBuilder<T> query = Query.Insert<T>(entity);
 				return contextAdapterService.Insert(query);
 			} else {
@@ -16,7 +17,9 @@ namespace Pistachio {
 				if(updateLines > 0) {
 					return id;
 				} else {
-					return -1;
+					QueryInsertBuilder<T> queryInsert = Query.Insert<T>(entity);
+					return contextAdapterService.Insert(queryInsert);
+					// return -1;
 				}
 			}
 		}

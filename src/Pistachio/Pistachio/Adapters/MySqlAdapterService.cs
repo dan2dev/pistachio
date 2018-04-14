@@ -3,8 +3,9 @@ using System.Reflection;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using Pistachio.Reflection;
-using Tonolucro.Library.Utilities;
+// using Tonolucro.Library.Utilities;
 using Pistachio.MySql;
+using Pistachio.Helpers;
 
 namespace Pistachio {
 	public class MySqlAdapterService : IAdapterService {
@@ -310,7 +311,22 @@ namespace Pistachio {
 			var listReturn = QueryToList<T>(query) as List<T>;
 			return listReturn;
 		}
+		public PaginatedList<T> FindAllPaginated<T>(QueryFindAllBuilder<T> query) where T : IEntity, new() {
+			var listReturn = QueryToList<T>(query) as List<T>;
 
+			var countQuery = new QueryCountBuilder<T>();
+			countQuery.Model.Join = query.Model.Join;
+			countQuery.Model.JoinAll = query.Model.JoinAll;
+			countQuery.Model.Where = query.Model.Where;
+			var count = Count<T>(countQuery);
+			return new PaginatedList<T>() {
+				Items = listReturn,
+				Page = query.Model.Page,
+				RowsByPage = query.Model.RowsByPage,
+				Skip = query.Model.Skip,
+				Count = count,
+			};
+		}
 		public T FindOne<T>(QueryFindOneBuilder<T> query) where T : IEntity, new() {
 			var listReturn = QueryToList<T>(query);
 			T entity = default(T);

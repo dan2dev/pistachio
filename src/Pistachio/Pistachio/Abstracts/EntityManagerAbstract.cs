@@ -44,6 +44,9 @@ namespace Pistachio {
 			var returnQuery = query(newQuery);
 			return (adapterService ?? ContextAdapterService).Delete<T>(returnQuery);
 		}
+		public static bool Delete(QueryDeleteBuilder<T> query, IAdapterService adapterService = null) {
+			return (adapterService ?? ContextAdapterService).Delete<T>(query);
+		}
 		public static bool Delete(long id, IAdapterService adapterService = null) {
 			var query = Query.Delete<T>().Where(x => x.Id == id);
 			return (adapterService ?? ContextAdapterService).Delete(query);
@@ -53,6 +56,7 @@ namespace Pistachio {
 			return (adapterService ?? ContextAdapterService).Delete(query);
 		}
 
+		// findAll
 		public static List<T> FindAll(IAdapterService adapterService = null) {
 			return FindAll(query => query, adapterService);
 		}
@@ -64,6 +68,20 @@ namespace Pistachio {
 		public static List<T> FindAll(QueryFindAllBuilder<T> query, IAdapterService adapterService = null) {
 			return (adapterService ?? ContextAdapterService).FindAll<T>(query);
 		}
+		// findAllPaginated
+		public static PaginatedList<T> FindAllPaginated(IAdapterService adapterService = null) {
+			return FindAllPaginated(query => query, adapterService);
+		}
+		public static PaginatedList<T> FindAllPaginated(Func<QueryFindAllBuilder<T>, QueryFindAllBuilder<T>> query, IAdapterService adapterService = null) {
+			QueryFindAllBuilder<T> newQuery = new QueryFindAllBuilder<T>();
+			var returnQuery = query(newQuery);
+			return (adapterService ?? ContextAdapterService).FindAllPaginated<T>(returnQuery);
+		}
+		public static PaginatedList<T> FindAllPaginated(QueryFindAllBuilder<T> query, IAdapterService adapterService = null) {
+			return (adapterService ?? ContextAdapterService).FindAllPaginated<T>(query);
+		}
+
+
 
 		//public static QueryFindAllBuilder<T> FindAll(IAdapterService adapterService = null) {
 		//	QueryFindAllBuilder<T> newQuery = new QueryFindAllBuilder<T>();

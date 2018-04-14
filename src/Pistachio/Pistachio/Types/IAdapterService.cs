@@ -4,6 +4,7 @@ namespace Pistachio {
 	public interface IAdapterService {
 		string ConnectionString { get; set; }
 		List<T> FindAll<T>(QueryFindAllBuilder<T> query) where T : IEntity, new();
+		PaginatedList<T> FindAllPaginated<T>(QueryFindAllBuilder<T> query) where T : IEntity, new();
 		T FindOne<T>(QueryFindOneBuilder<T> query) where T : IEntity, new(); // implement query object
 		int Count<T>(QueryCountBuilder<T> query) where T : IEntity, new();
 		long Insert<T>(QueryInsertBuilder<T> query) where T : IEntity, new();

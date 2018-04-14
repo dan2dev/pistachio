@@ -17,5 +17,25 @@ namespace Pistachio {
 		public QueryBuilderModel From = null;
 		public int Skip = -1;
 		public int Rows = -1;
+		public int Page {
+			get {
+				if(Skip < 0 || Rows < 0) {
+					return 1;
+				} else {
+					return (Skip / Rows) + 1;
+				}
+			}
+			set {
+				this.Skip = (value - 1) * Rows;
+			}
+		}
+		public int RowsByPage {
+			get {
+				return this.Rows;
+			}
+			set {
+				this.Rows = value;
+			}
+		}
 	}
 }

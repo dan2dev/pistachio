@@ -66,7 +66,8 @@ namespace Pistachio.MySql {
 			str.Append($" INSERT INTO `{entityInfo.Attribute.ColletionName}` ( ");
 			for (int i = 0; i < insertList.Count; i++) {
 				if (i > 0) str.Append(" , ");
-				str.Append(insertList[i].Key);
+				//str.Append(insertList[i].Key);
+				str.Append($" `{insertList[i].Key}` ");
 			}
 			str.Append(" ) VALUES ( ");
 			for (int i = 0; i < insertList.Count; i++) {
@@ -94,7 +95,7 @@ namespace Pistachio.MySql {
 				var keyParameter = GetStackParameterKey(value);
 				// --------------
 				if (key != "identificador" ) {
-					updateSets.Add($"{updateList[i].Key} = ?{keyParameter} ");
+					updateSets.Add($"`{updateList[i].Key}` = ?{keyParameter} "); 
 				}
 			}
 			str.Append(string.Join(" , ", updateSets));

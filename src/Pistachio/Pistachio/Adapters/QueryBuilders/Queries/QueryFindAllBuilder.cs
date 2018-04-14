@@ -10,6 +10,7 @@ namespace Pistachio {
 		IQuerySortable<T, TQuery>,
 		IQueryLimitable<T, TQuery>,
 		IQueryFromable<T, TQuery>,
+		//IQueryCountable<T, TQuery>,
 		IQueryFindAllBuilder
 		where TQuery : QueryFindAllBuilder<T, TQuery>, new() where T : IEntity, new() {
 		public QueryFindAllBuilder() : base() {
@@ -30,7 +31,12 @@ namespace Pistachio {
 			this.Model.Rows = rows;
 			return this as TQuery;
 		}
-
+		public TQuery Page(int rowsByPage = -1, int page = -1) {
+			this.Model.RowsByPage = rowsByPage;
+			if(page < 1) {page = 1;}
+			this.Model.Page = page;
+			return this as TQuery;
+		}
 		public TQuery SortBy(Expression<Func<T, object>> field, Order order = Order.Asc) {
 			this.Model.SortBy.Add(new QuerySortModel() {
 				Field = field,

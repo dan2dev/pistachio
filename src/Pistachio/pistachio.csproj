@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<PackageId>Pistachio</PackageId>
+		<Description>Light and Simple ORM for MySql and .Net Core</Description>
+		<Version>0.2.0</Version>
+		<Authors>Danilo C Castro</Authors>
+		<Company>dan2dev</Company>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+		<PackageProjectUrl>https://github.com/dan2dev/pistachio</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/dan2dev/pistachio</RepositoryUrl>
+		<PackageTags>orm dotnet core .net mysql</PackageTags>
+
+		<PackageIconUrl>http://www.freepngimg.com/download/database/7-2-database-png-image.png</PackageIconUrl>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="MySql.Data" Version="8.0.10-rc" />
+		<PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+	</ItemGroup>
+</Project>
