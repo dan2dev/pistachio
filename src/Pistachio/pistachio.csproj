@@ -16,6 +16,6 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="MySql.Data" Version="8.0.10-rc" />
-		<PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 </Project>
